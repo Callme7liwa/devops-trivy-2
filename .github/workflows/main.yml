@@ -71,6 +71,7 @@ jobs:
           ignore-unfixed: true
           # Types de vulnérabilités à rechercher
           vuln-type: 'os,library'
+          output: 'trivy-results.sarif'
 
       - name: Send report by email
         uses: dawidd6/action-send-mail@v3
