@@ -73,19 +73,6 @@ jobs:
           vuln-type: 'os,library'
           output: 'trivy-results.sarif'
 
-      - name: Send report by email
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          from: durapp123@gmail.com
-          to: ayoubseddiki132@gmail.com
-          subject: "Trivy Scan Report"
-          body: "Please find attached the Trivy scan report."
-          attachments: 'trivy-results.sarif'
-
       # Téléchargement des résultats de l'analyse Trivy dans l'onglet Sécurité de GitHub
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
