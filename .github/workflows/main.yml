@@ -72,20 +72,17 @@ jobs:
           # Types de vulnérabilités à rechercher
           vuln-type: 'os,library'
 
-      # Envoi du rapport d'analyse Trivy par email
-      - name: Send Trivy scan report by email
+      - name: Send report by email
         uses: dawidd6/action-send-mail@v2
         with:
-          # Configuration du serveur SMTP
           server_address: smtp.example.com
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          # Sujet et destinataire du mail
+          from: durapp123@gmail.com
+          to: ayoubseddiki132@gmail.com
           subject: "Trivy Scan Report"
           body: "Please find attached the Trivy scan report."
-          to: ayoubseddiki132@gmail.com
-          # Pièce jointe : le rapport SARIF
           attachments: 'trivy-results.sarif'
 
       # Téléchargement des résultats de l'analyse Trivy dans l'onglet Sécurité de GitHub
