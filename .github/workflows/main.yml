@@ -64,7 +64,7 @@ jobs:
           # Image à analyser
           image-ref: 'callme7liwa/github-action-trivy-test'
           # Format du rapport
-          format: 'table'
+          format: 'sarif'
           # Arrêt du workflow en cas de vulnérabilités critiques
           exit-code: '0'
           # Ignorer les vulnérabilités non corrigées
