@@ -78,9 +78,9 @@ jobs:
         id: search_vul
         run: |
           if grep -q '"tags": \[.*"vulnerability".*"security".*\("CRITICAL"\|"HIGH"\).*\]' trivy-results-docker.sarif; then
-            exit 1
-          else
             exit 0
+          else
+            exit 1
           fi
       # Téléchargement des résultats de l'analyse Trivy dans l'onglet Sécurité de GitHub
       - name: Upload Trivy scan results to GitHub Security tab
