@@ -91,6 +91,7 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "Trivy Scan Report"
           body: "Please find attached the Trivy scan report."
+          from : durapp123@gmail.com
           to: ayoubseddiki132@gmail.com
           attachments: 'trivy-results-docker.sarif' 
 
