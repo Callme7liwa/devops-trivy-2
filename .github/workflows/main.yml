@@ -9,6 +9,7 @@ on:
       - main
       
 permissions:
+  actions: read
   security-events: write
   
 jobs:
@@ -78,7 +79,7 @@ jobs:
 
       # Téléchargement des résultats de l'analyse Trivy dans l'onglet Sécurité de GitHub
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           # Fichier SARIF à télécharger
