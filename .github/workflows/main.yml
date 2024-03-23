@@ -64,22 +64,21 @@ jobs:
           # Image à analyser
           image-ref: 'callme7liwa/github-action-trivy-test'
           # Format du rapport
-          format: 'sarif'
-          # Arrêt du workflow en cas de vulnérabilités critiques
-          exit-code: '0'
+          format: 'template'
+          template: '@/contrib/sarif.tpl'
+          output: 'trivy-results-docker.sarif'
           # Ignorer les vulnérabilités non corrigées
           ignore-unfixed: true
           # Types de vulnérabilités à rechercher
           vuln-type: 'os,library'
-          output: 'trivy-results.sarif'
 
       # Téléchargement des résultats de l'analyse Trivy dans l'onglet Sécurité de GitHub
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v1
         if: always()
         with:
           # Fichier SARIF à télécharger
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: 'trivy-results-docker.sarif'
 
       # Construction et push de l'image pour le déploiement
       - name: Build & push image to deployment
