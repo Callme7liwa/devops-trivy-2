@@ -7,7 +7,10 @@ on:
   pull_request:
     branches:
       - main
-
+      
+permissions:
+  security-events: write
+  
 jobs:
   trivy_scan:
     name: Trivy Scan
@@ -71,6 +74,7 @@ jobs:
           ignore-unfixed: true
           # Types de vulnérabilités à rechercher
           vuln-type: 'os,library'
+          
 
       # Téléchargement des résultats de l'analyse Trivy dans l'onglet Sécurité de GitHub
       - name: Upload Trivy scan results to GitHub Security tab
