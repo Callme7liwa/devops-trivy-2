@@ -55,18 +55,24 @@ jobs:
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Run Trivy vulnerability scanner in docker mode
+
+      # Exécution de l'analyse de vulnérabilités Trivy
+      - name: Run Trivy vulnerability scanner
+        id: trivy_scan
         uses: aquasecurity/trivy-action@master
         with:
-         image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
-         format: 'template'
-         template: '@/contrib/sarif.tpl'
-         output: 'trivy-results-docker.sarif'
-         severity: 'CRITICAL'
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-         sarif_file: 'trivy-results-docker.sarif'
+          # Image à analyser
+          image-ref: 'callme7liwa/github-action-trivy-test'
+          # Format du rapport
+          format: 'sarif'
+          # Arrêt du workflow en cas de vulnérabilités critiques
+          exit-code: '0'
+          # Ignorer les vulnérabilités non corrigées
+          ignore-unfixed: true
+          # Types de vulnérabilités à rechercher
+          vuln-type: 'os,library'
+          output: 'trivy-results.sarif'
+
       # Téléchargement des résultats de l'analyse Trivy dans l'onglet Sécurité de GitHub
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
