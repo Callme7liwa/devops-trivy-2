@@ -71,6 +71,7 @@ jobs:
           ignore-unfixed: true
           # Types de vulnérabilités à rechercher
           vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
           
 
       # Téléchargement des résultats de l'analyse Trivy dans l'onglet Sécurité de GitHub
