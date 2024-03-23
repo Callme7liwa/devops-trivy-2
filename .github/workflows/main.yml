@@ -72,7 +72,10 @@ jobs:
           # Types de vulnérabilités à rechercher
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
-          
+
+      - name: Check for vulnerabilities
+        run: exit ${{ steps.trivy_scan.outputs.exit_code }}
+        if: steps.trivy_scan.outputs.exit_code != '0'
 
       # Téléchargement des résultats de l'analyse Trivy dans l'onglet Sécurité de GitHub
       - name: Upload Trivy scan results to GitHub Security tab
@@ -95,6 +98,8 @@ jobs:
           from : durapp123@gmail.com
           to: ayoubseddiki132@gmail.com
           attachments: 'trivy-results-docker.sarif' 
+
+          
 
       # Construction et push de l'image pour le déploiement
       - name: Build & push image to deployment
